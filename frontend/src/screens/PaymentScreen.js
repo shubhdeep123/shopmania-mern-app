@@ -51,7 +51,7 @@ const PaymentScreen = ({ history }) => {
         </Form.Group>
 
         <Button type="submit" variant="primary">
-          Proceed to checkout
+          Proceed to place order
         </Button>
       </Form>
     </FormContainer>
