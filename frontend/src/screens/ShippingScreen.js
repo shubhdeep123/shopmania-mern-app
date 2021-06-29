@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { saveShippingAddress } from "../actions/cartActions";
+import Meta from '../components/Meta'
 
 const ShippingScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
@@ -22,9 +23,11 @@ const ShippingScreen = ({ history }) => {
     history.push("/payment");
   };
   return (
+    <>
+      <Meta title="Shipping Details"/>
     <FormContainer>
       <CheckoutSteps step1 step2 />
-      <h1>Shipping</h1>
+      <h1>Shipping Details</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="address">
           <Form.Label>Address</Form.Label>
@@ -70,7 +73,8 @@ const ShippingScreen = ({ history }) => {
           Proceed to payment
         </Button>
       </Form>
-    </FormContainer>
+      </FormContainer>
+      </>
   );
 };
 

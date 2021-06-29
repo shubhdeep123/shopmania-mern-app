@@ -15,6 +15,7 @@ import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
 } from "../constants/orderConstants";
+import Meta from "../components/Meta";
 
 const OrderScreen = ({ history, match }) => {
   const orderId = match.params.id;
@@ -89,6 +90,7 @@ const OrderScreen = ({ history, match }) => {
     <Message variant="danger">{error}</Message>
   ) : (
     <>
+      <Meta title="Orders" />
       <h1>Order {order._id}</h1>
       <Row>
         <Col md={8}>
@@ -209,17 +211,20 @@ const OrderScreen = ({ history, match }) => {
                 </ListGroup.Item>
               )}
               {loadingDeliver && <Loader />}
-              {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
-                <ListGroup.Item>
-                  <Button
-                    type="button"
-                    className="btn btn-block"
-                    onClick={deliverHandler}
-                  >
-                    Mark As Delivered
-                  </Button>
-                </ListGroup.Item>
-              )}
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      type="button"
+                      className="btn btn-block"
+                      onClick={deliverHandler}
+                    >
+                      Mark As Delivered
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>

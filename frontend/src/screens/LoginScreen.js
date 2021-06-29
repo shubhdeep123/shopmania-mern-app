@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { login } from "../actions/userActions";
+import Meta from '../components/Meta'
 
 const LoginScreen = ({ location, history }) => {
   const [email, setEmail] = useState("");
@@ -29,6 +30,8 @@ const LoginScreen = ({ location, history }) => {
   };
 
   return (
+    <>
+      <Meta title="Login To Shop Mania"/>
     <FormContainer>
       <h1>Sign In</h1>
       {error&& <Message variant='danger'> {error}</Message>}
@@ -64,7 +67,8 @@ const LoginScreen = ({ location, history }) => {
           </Link>
         </Col>
       </Row>
-    </FormContainer>
+      </FormContainer>
+      </>
   );
 };
 
