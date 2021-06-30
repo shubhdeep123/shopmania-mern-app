@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Shop Mania E-commerce website",
   "engines": {
-    "node": "12.11.1"
+    "node": "16.3.0"
   },
   "main": "server.js",
   "type": "module",
