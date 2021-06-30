@@ -71,11 +71,10 @@ const OrderScreen = ({ history, match }) => {
       document.body.appendChild(script);
     };
 
-    if (!order || successPay || successDeliver) {
-      dispatch({ type: ORDER_PAY_RESET });
-      dispatch({ type: ORDER_DELIVER_RESET });
-      dispatch(getOrderDetails(orderId));
-    } else if (!order.isPaid) {
+    if (!order || order._id !== orderId || successPay || successDeliver) {
+      dispatch({ type: ORDER_PAY_RESET })
+      dispatch({ type: ORDER_DELIVER_RESET })
+      dispatch(getOrderDetails(orderId))
       if (!window.paypal) {
         addPaypalScript();
       } else {

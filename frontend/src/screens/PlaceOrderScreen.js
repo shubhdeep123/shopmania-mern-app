@@ -5,11 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { createOrder } from "../actions/ordersActions";
-import Meta from '../components/Meta'
+import Meta from "../components/Meta";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
+import { USER_DETAILS_RESET } from "../constants/userConstants";
 
 const PlaceOrderScreen = ({ history }) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
+  if (!cart.shippingAddress.address) {
+    history.push('/shipping')
+  } else if (!cart.paymentMethod) {
+    history.push('/payment')
+  }
 
   // calculate Prices
   const addDecimals = (num) => {
@@ -34,9 +42,11 @@ const PlaceOrderScreen = ({ history }) => {
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`);
+      dispatch({ type: USER_DETAILS_RESET });
+      dispatch({ type: ORDER_CREATE_RESET });
     }
     // eslint-disable-next-line
-  }, [history, success]);
+  }, [history, success,order]);
 
   const placeOrderHandler = () => {
     dispatch(
@@ -54,7 +64,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   return (
     <>
-      <Meta title="Place Order"/>
+      <Meta title="Place Order" />
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
         <Col md={8}>
